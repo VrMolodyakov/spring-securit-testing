@@ -1,6 +1,6 @@
 package com.project.finance.controllers;
-
 import com.project.finance.controllers.dto.LoginRequest;
+import com.project.finance.controllers.dto.RefreshTokenRequest;
 import com.project.finance.controllers.dto.RegistrationRequest;
 import com.project.finance.controllers.dto.JwtResponse;
 import com.project.finance.dbServices.ClientService;
@@ -12,7 +12,6 @@ import com.project.finance.jwt.provider.JwtProvider;
 import com.project.finance.services.ClientDetailsImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +20,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.validation.Valid;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -63,8 +61,8 @@ public class AuthRestController {
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<?> refreshAccessToken(RequestEntity<String> refreshTokenRequest){
-        String refreshToken = refreshTokenRequest.getBody();
+    public ResponseEntity<?> refreshAccessToken(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest){
+        String refreshToken = refreshTokenRequest.getRefreshToken();
         return refreshTokenDBService.findByToken(refreshToken)
                 .map(refreshTokenDBService::deleteIfExpired)
                 .map(RefreshToken::getClient)
