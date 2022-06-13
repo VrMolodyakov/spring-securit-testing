@@ -11,26 +11,23 @@
 </head>
 
 <body>
-<form th:action="@{/registration}" method="get">
-  <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
+<form class="form-signin" th:action="@{/login}" method="post">
+  <h2 class="form-signin-heading">Please sign in</h2>
+  <p>Example: user / domain / password</p>
+  <p th:if="${param.error}" class="error">Invalid user, password, or domain</p>
+  <p>
+    <label for="login" class="sr-only">Username</label>
+    <input type="text" id="login" name="login" class="form-control"
+           placeholder="login" required autofocus/>
+  </p>
+  <p>
+    <label for="password" class="sr-only">Password</label>
+    <input type="password" id="password" name="password" class="form-control"
+           placeholder="Password" required autofocus/>
+  </p>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button><br/>
+  <p><a href="/index" th:href="@{/index}">Back to home page</a></p>
 </form>
-
-<div class="container">
-  <form th:action="@{/login}" method="POST" class="form-signin">
-    <h3 class="form-signin-heading" th:text="Welcome"></h3>
-    <br/>
-
-    <input type="text" id="username" name="username" placeholder="Login"
-           class="form-control"/> <br/>
-    <input type="password" th:placeholder="Password"
-           id="password" name="password" class="form-control"/> <br/>
-
-    <div align="center" th:if="${param.error}">
-      <p style="font-size: 20; color: #FF1C19;">User Name or Password invalid, please verify</p>
-    </div>
-    <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
-            th:text="Login"></button>
-  </form>
 </div>
 </body>
 </html>

@@ -10,10 +10,11 @@ import java.util.Optional;
 
 public interface ClientRepository  {
     Optional<Client> findByClientLogin(String name);
-    Client findByClientEmail(String email);
+    Optional<Client> findByClientEmail(String email);
+    Optional<Client> findByClientId(Long id);
     boolean deleteUserById(Long id);
     Optional<Client> findById(Long id);
     List<Client> findAllUsers();
-    boolean saveUser(Client user);
+    boolean saveClient(Client user);
     void deleteByUserName(String name);
 }

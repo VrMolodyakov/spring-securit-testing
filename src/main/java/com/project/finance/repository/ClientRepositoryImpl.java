@@ -5,8 +5,10 @@ import com.project.finance.entities.Role;
 import lombok.AllArgsConstructor;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
@@ -30,7 +32,6 @@ public class ClientRepositoryImpl implements ClientRepository {
 
     @Override
     public Optional<Client> findByClientLogin(String login) {
-        System.out.println("--------------------- INSiDE REPOSITORY-----------------------");
         String hqlRequest = "from Client C JOIN FETCH C.roles where C.login =:login";
         Query query = sessionFactory.getCurrentSession().createQuery(hqlRequest).setParameter("login",login);
         List<Client> rs = (List<Client>) query.getResultList();
@@ -41,8 +42,25 @@ public class ClientRepositoryImpl implements ClientRepository {
     }
 
     @Override
-    public Client findByClientEmail(String email) {
-        return null;
+    public Optional<Client> findByClientEmail(String email) {
+        String hqlRequest = "from Client C JOIN FETCH C.roles where C.email =:email";
+        Query query = sessionFactory.getCurrentSession().createQuery(hqlRequest).setParameter("email",email);
+        List<Client> rs = (List<Client>) query.getResultList();
+        if(rs.isEmpty()){
+            return Optional.empty();
+        }
+        return Optional.of( (Client) query.getResultList().get(0) );
+    }
+
+    @Override
+    public Optional<Client> findByClientId(Long id) {
+        String hqlRequest = "from Client C JOIN FETCH C.roles where C.id =:id";
+        Query query = sessionFactory.getCurrentSession().createQuery(hqlRequest).setParameter("id",id);
+        List<Client> rs = (List<Client>) query.getResultList();
+        if(rs.isEmpty()){
+            return Optional.empty();
+        }
+        return Optional.of( (Client) query.getResultList().get(0) );
     }
 
     @Override
@@ -61,11 +79,10 @@ public class ClientRepositoryImpl implements ClientRepository {
     }
 
     @Override
-    public boolean saveUser(Client client) {
-        System.out.println("--------------------- INSiDE SAVE-----------------------");
-        Optional<Client> newUser = this.findByClientLogin(client.getLogin());
-        System.out.println(newUser.isPresent());
-        if(!newUser.isPresent()){
+    public boolean saveClient(Client client) {
+        Optional<Client> byLogin = this.findByClientLogin(client.getLogin());
+        Optional<Client> byEmail = this. findByClientEmail(client.getEmail());
+        if(!byLogin.isPresent() && !byEmail.isPresent()){
             client.setRoles(Collections.singleton(new Role(1L, "USER")));
             client.setPassword(bCryptPasswordEncoder.encode(client.getPassword()));
             client.setCreationDate(LocalDateTime.now());
@@ -80,4 +97,6 @@ public class ClientRepositoryImpl implements ClientRepository {
     public void deleteByUserName(String name) {
 
     }
+
+
 }
