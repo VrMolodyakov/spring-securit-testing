@@ -12,9 +12,7 @@ public interface ClientRepository  {
     Optional<Client> findByClientLogin(String name);
     Optional<Client> findByClientEmail(String email);
     Optional<Client> findByClientId(Long id);
-    boolean deleteUserById(Long id);
-    Optional<Client> findById(Long id);
-    List<Client> findAllUsers();
     boolean saveClient(Client user);
-    void deleteByUserName(String name);
+    int deleteClientById(Long id);
+
 }

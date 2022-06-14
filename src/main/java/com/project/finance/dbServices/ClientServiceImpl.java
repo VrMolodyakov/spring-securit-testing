@@ -46,4 +46,10 @@ public class ClientServiceImpl implements ClientService {
         logger.info("try to find with id {}",id);
         return clientRepository.findByClientId(id);
     }
+
+    @Override
+    public int deleteClientById(Long id) {
+        logger.info("try to delete with id {}",id);
+        return clientRepository.deleteClientById(id);
+    }
 }

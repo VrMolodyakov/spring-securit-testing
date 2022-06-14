@@ -74,7 +74,7 @@ public class AuthRestController {
                     return new ResponseEntity<>(body, HttpStatus.OK);
                 })
                 .orElseThrow(() -> new ExpiredTokenException(refreshToken,
-                        "Refresh token expired."));
+                        "Refresh token cannot be found."));
 
     }
 }

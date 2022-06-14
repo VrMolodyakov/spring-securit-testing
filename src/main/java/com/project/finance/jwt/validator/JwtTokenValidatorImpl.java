@@ -20,6 +20,7 @@ public class JwtTokenValidatorImpl implements JwtTokenValidator {
     @Override
     public boolean validateJwtToken(String token, UserDetails details) {
         final String username = getUsernameFromToken(token);
+        System.out.println(username);
         return (username.equals(details.getUsername()) && !isExpired(token));
     }
 

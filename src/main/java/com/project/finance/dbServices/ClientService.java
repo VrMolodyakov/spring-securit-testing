@@ -9,4 +9,5 @@ public interface ClientService {
     Optional<Client> findClientByLogin(String login);
     Optional<Client> findClientByEmail(String email);
     Optional<Client> findClientById(Long id);
+    int deleteClientById(Long id);
 }

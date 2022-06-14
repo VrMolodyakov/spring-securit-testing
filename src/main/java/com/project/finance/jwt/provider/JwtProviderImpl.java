@@ -24,7 +24,6 @@ public class JwtProviderImpl implements JwtProvider {
 
     @Override
     public String generateJwtToken(ClientDetailsImpl clientDetails) {
-        //ClientDetailsImpl clientDetails = (ClientDetailsImpl) authentication.getPrincipal();
         return generateTokenForClientLogin(clientDetails.getUsername());
 
     }

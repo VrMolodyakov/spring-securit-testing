@@ -13,6 +13,7 @@ import java.time.Instant;
 @Getter
 @Setter
 @Builder
+//@EqualsAndHashCode(exclude = "client")
 public class RefreshToken {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

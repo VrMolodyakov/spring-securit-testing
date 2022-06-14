@@ -63,21 +63,6 @@ public class ClientRepositoryImpl implements ClientRepository {
     }
 
     @Override
-    public boolean deleteUserById(Long id) {
-        return false;
-    }
-
-    @Override
-    public Optional<Client> findById(Long id) {
-        return Optional.empty();
-    }
-
-    @Override
-    public List<Client> findAllUsers() {
-        return null;
-    }
-
-    @Override
     public boolean saveClient(Client client) {
         Optional<Client> byLogin = this.findByClientLogin(client.getLogin());
         Optional<Client> byEmail = this. findByClientEmail(client.getEmail());
@@ -93,9 +78,11 @@ public class ClientRepositoryImpl implements ClientRepository {
     }
 
     @Override
-    public void deleteByUserName(String name) {
-
+    public int deleteClientById(Long id) {
+        String hqlRequest = "delete from Client C where C.id =:id";
+        Query query = sessionFactory.getCurrentSession().createQuery(hqlRequest);
+        query.setParameter("id", id);
+        return query.executeUpdate();
     }
-
 
 }
