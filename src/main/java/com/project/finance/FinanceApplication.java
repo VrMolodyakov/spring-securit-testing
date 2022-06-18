@@ -12,6 +12,9 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.security.crypto.keygen.KeyGenerators;
+import yahoofinance.Stock;
+import yahoofinance.YahooFinance;
+
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -19,6 +22,7 @@ import java.time.temporal.ChronoField;
 import java.util.Optional;
 
 @SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
+
 public class FinanceApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
@@ -44,6 +48,8 @@ public class FinanceApplication implements CommandLineRunner {
 		/*Optional<Client> loken16 = clientService.findClientByLogin("Loken16");
 		Client client = loken16.get();
 		tokenRepository.deleteByClientId(client);*/
+		Stock stock = YahooFinance.get("TSLA");
+		System.out.println(stock.getHistory());
 
 
 	}
