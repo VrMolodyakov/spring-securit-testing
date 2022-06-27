@@ -2,7 +2,7 @@ package com.project.finance.securityConfig;
 
 import com.project.finance.jwt.ClientAuthTokenFilter;
 import com.project.finance.jwt.JwtEntryPoint;
-import com.project.finance.services.ClientDetailsService;
+import com.project.finance.services.client.ClientDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

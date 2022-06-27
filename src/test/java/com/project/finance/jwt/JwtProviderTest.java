@@ -1,9 +1,7 @@
 package com.project.finance.jwt;
 
-import com.project.finance.entities.Client;
-import com.project.finance.entities.Role;
 import com.project.finance.jwt.provider.JwtProvider;
-import com.project.finance.services.ClientDetailsImpl;
+import com.project.finance.services.client.ClientDetailsImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,11 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 @SpringBootTest
 public class JwtProviderTest {

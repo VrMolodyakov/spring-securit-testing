@@ -1,7 +1,6 @@
 package com.project.finance.jwt.provider;
 
-import com.project.finance.services.ClientDetailsImpl;
-import org.springframework.security.core.Authentication;
+import com.project.finance.services.client.ClientDetailsImpl;
 
 public interface JwtProvider {
     String generateJwtToken(ClientDetailsImpl clientDetails);

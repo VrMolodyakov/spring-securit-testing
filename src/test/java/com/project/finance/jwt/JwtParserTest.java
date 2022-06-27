@@ -2,7 +2,7 @@ package com.project.finance.jwt;
 
 import com.project.finance.jwt.parser.JwtParser;
 import com.project.finance.jwt.provider.JwtProvider;
-import com.project.finance.services.ClientDetailsImpl;
+import com.project.finance.services.client.ClientDetailsImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

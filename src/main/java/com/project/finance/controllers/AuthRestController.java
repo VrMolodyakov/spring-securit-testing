@@ -9,8 +9,10 @@ import com.project.finance.entities.Client;
 import com.project.finance.entities.RefreshToken;
 import com.project.finance.exception.ExpiredTokenException;
 import com.project.finance.jwt.provider.JwtProvider;
-import com.project.finance.services.ClientDetailsImpl;
+import com.project.finance.services.client.ClientDetailsImpl;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,6 +36,7 @@ public class AuthRestController {
     private final JwtProvider jwtProvider;
     private final AuthenticationManager authenticationManager;
     private final RefreshTokenDBService refreshTokenDBService;
+    private final static Logger logger = LoggerFactory.getLogger(AuthRestController.class);
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateClient(@Valid @RequestBody LoginRequest loginRequest) {
@@ -64,6 +67,7 @@ public class AuthRestController {
 
     @PostMapping("/refresh")
     public ResponseEntity<?> refreshAccessToken(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest){
+        logger.info("try to refresh token with {}",refreshTokenRequest);
         String refreshToken = refreshTokenRequest.getRefreshToken();
         return refreshTokenDBService.findByToken(refreshToken)
                 .map(refreshTokenDBService::deleteIfExpired)

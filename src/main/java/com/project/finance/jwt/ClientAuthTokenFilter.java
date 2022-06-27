@@ -2,8 +2,7 @@ package com.project.finance.jwt;
 
 import com.project.finance.jwt.parser.JwtParser;
 import com.project.finance.jwt.validator.JwtTokenValidator;
-import com.project.finance.services.ClientDetailsService;
-import lombok.AllArgsConstructor;
+import com.project.finance.services.client.ClientDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
